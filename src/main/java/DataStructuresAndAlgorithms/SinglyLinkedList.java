@@ -52,9 +52,55 @@ public class SinglyLinkedList {
        }
        
        newTail.next = null;
+       this.tail = newTail;
        this.length--;
-        System.out.println(current);
+       //System.out.println(current);
        return current;
+    }
+    
+    //Shift will just remove the head from the list and return that; a pop from beginning.
+    public Node shift(){
+        Node currentHead = this.head;
+        Node nextHead = currentHead.next;
+        
+        currentHead.next = null;
+        this.head = nextHead;
+        this.length--;
+        return currentHead;
+    }
+    
+    //add in a new head
+    public void unshift(int val){
+        if(this.head == null){
+            this.head = new Node(val);
+            this.tail = new Node(val);
+        }else{
+            Node toAdd = new Node(val);
+            Node currentHead = this.head;
+            toAdd.next = currentHead;
+            this.head = toAdd;
+            this.length++;
+        } 
+    }
+    
+    public Node get(int index){
+        if(index < 0 || index > this.length){
+            return null;
+        }
+        Node current = this.head;
+        int count  = 0; 
+        
+        while(count != index){
+            current = current.next;
+            count++;
+        }
+        return current;
+    }
+    
+    @Override
+    public String toString(){
+        String toReturn = "Head: " + this.head.value + " Tail: " + this.tail.value + " HeadNext: " + this.head.next.value;
+        return toReturn;
     }
     
     public static void main(String [] args){
@@ -63,6 +109,13 @@ public class SinglyLinkedList {
         list.push(3);
         list.push(8);
         list.push(7);
+        System.out.println(list);
+        list.pop();
+        System.out.println(list);
+        list.shift();
+        System.out.println(list);
+        list.unshift(4);
+        System.out.println(list);
     }
 }
 
