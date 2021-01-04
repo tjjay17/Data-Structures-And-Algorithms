@@ -97,6 +97,32 @@ public class SinglyLinkedList {
         return current;
     }
     
+    public void set(int index, int value){
+        Node toChange = this.get(index);
+        if(toChange != null){
+           toChange.value = value;
+        }
+    }
+    
+    public boolean insert(int index, int value){
+        if(this.length == index){
+            this.push(value);
+            this.length++;
+            return true;
+        }else if(index > this.length || index < 0){
+            return false;
+        }else{
+            Node oneBefore = this.get(index - 1);
+            Node atIndex = this.get(index);
+            
+            Node newNode = new Node(value);
+            oneBefore.next = newNode;
+            newNode.next = atIndex;
+            this.length++;
+            return true;
+        }
+    }
+    
     @Override
     public String toString(){
         String toReturn = "Head: " + this.head.value + " Tail: " + this.tail.value + " HeadNext: " + this.head.next.value;
@@ -109,13 +135,9 @@ public class SinglyLinkedList {
         list.push(3);
         list.push(8);
         list.push(7);
+        list.insert(2,6);
         System.out.println(list);
-        list.pop();
-        System.out.println(list);
-        list.shift();
-        System.out.println(list);
-        list.unshift(4);
-        System.out.println(list);
+        System.out.println(list.get(1).next.next.value);
     }
 }
 
