@@ -23,6 +23,7 @@ public class SinglyLinkedList {
     
     public void push(int val){
         Node newNode = new Node(val);
+        Node currentTail = this.tail;
         
         if(this.length == 0){
             this.head = newNode;
@@ -30,7 +31,7 @@ public class SinglyLinkedList {
             newNode.next = null;
             length++;
         }else{
-            this.tail.next = newNode;
+            currentTail.next = newNode;
             this.tail = newNode;
             length++;
         }     
@@ -123,10 +124,45 @@ public class SinglyLinkedList {
         }
     }
     
+    public void remove(int index){
+        Node toRemove = this.get(index);
+        Node before = this.get(index - 1);
+        Node after = this.get(index + 1);
+        if (index == this.length - 1){
+            this.pop();    
+        }else if(index == 0){
+            this.shift();
+        }else{
+            before.next = after;
+            toRemove.next = null;
+            length--;
+        }
+    }
+    
+    public void reverse(){
+        Node prev = null;
+        Node current = this.head;
+        Node next = null; 
+        
+        while(current != null){
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+    }
+    
     @Override
     public String toString(){
-        String toReturn = "Head: " + this.head.value + " Tail: " + this.tail.value + " HeadNext: " + this.head.next.value;
-        return toReturn;
+//        String toReturn = "Head: " + this.head.value + " Tail: " + this.tail.value + " HeadNext: " + this.head.next.value;
+//        return toReturn;
+          String result = "";
+          int count = 0;
+          while(count != this.length){
+              result = result + this.get(count).value + " ";
+              count++;
+          }
+          return result;
     }
     
     public static void main(String [] args){
@@ -135,9 +171,10 @@ public class SinglyLinkedList {
         list.push(3);
         list.push(8);
         list.push(7);
-        list.insert(2,6);
         System.out.println(list);
-        System.out.println(list.get(1).next.next.value);
+        list.reverse();
+        System.out.println(list);
+        
     }
 }
 
