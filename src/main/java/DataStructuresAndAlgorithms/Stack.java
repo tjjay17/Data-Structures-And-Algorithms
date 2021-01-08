@@ -6,18 +6,22 @@ package DataStructuresAndAlgorithms;
  */
 public class Stack {
     SinglyLinkedList list;
+    int size;
     public Stack(){
         this.list = new SinglyLinkedList();
+        this.size = 0;
     }
     
     public int pop(){
         Node popped = this.list.shift();
         System.out.println(popped.value);
+        this.size--;
         return popped.value;
     }
     
     public void push(int val){
         this.list.unshift(val);
+        this.size++;
     }
     
     @Override
