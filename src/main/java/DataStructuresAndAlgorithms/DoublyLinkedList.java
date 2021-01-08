@@ -1,28 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package DataStructuresAndAlgorithms;
 
-/**
- *
- * @author Tj
- */
- class Node{
-    Node next;
-    Node prev;
+ class dNode{
+    dNode next;
+    dNode prev;
     int value;
    
-    Node(int val){
+    dNode(int val){
         this.value = val;
         this.next = null;
         this.prev = null;
     }
 }
 public class DoublyLinkedList {
-   Node head;
-   Node tail;
+   dNode head;
+   dNode tail;
    int length;
    
    public DoublyLinkedList(){
@@ -32,7 +24,7 @@ public class DoublyLinkedList {
    }
    
    public void push(int val){
-       Node newNode = new Node(val);
+       dNode newNode = new dNode(val);
        
        if(this.length == 0){
            this.head = newNode;
@@ -45,8 +37,8 @@ public class DoublyLinkedList {
        this.length++;
    }
    
-   public Node pop(){
-       Node popped = this.head;
+   public dNode pop(){
+       dNode popped = this.head;
        if(this.length == 0){
            return null;
        }else if(this.length == 1){
@@ -59,7 +51,7 @@ public class DoublyLinkedList {
        }else{
            popped = this.tail;
            popped.prev = null;
-           Node beforeTail = this.tail.prev;
+           dNode beforeTail = this.tail.prev;
            beforeTail.next = null;
            this.tail = beforeTail;
            this.length--;
@@ -67,8 +59,8 @@ public class DoublyLinkedList {
        }
    }
    
-   public Node shift(){
-       Node toRemove = null;
+   public dNode shift(){
+       dNode toRemove = null;
        if(this.length == 0){
            return null;
        }else if(this.length == 1 ){
@@ -79,7 +71,7 @@ public class DoublyLinkedList {
            return toRemove;
        }else{
            toRemove = this.head;
-           Node headNext = this.head.next;
+           dNode headNext = this.head.next;
            this.head.next = null;
            headNext.prev = null;
            this.length--;
@@ -88,8 +80,8 @@ public class DoublyLinkedList {
    }
    
    public void unshift(int val){
-       Node newNode = new Node(val);
-       Node currentHead = this.head;
+       dNode newNode = new dNode(val);
+       dNode currentHead = this.head;
        
        if(this.length == 0){
            this.head = newNode;
@@ -102,7 +94,7 @@ public class DoublyLinkedList {
        this.length++;
    }
    
-   public Node get(int index){
+   public dNode get(int index){
        int mid = (int) Math.floor(this.length / 2);
        if(this.length == 1){
            return this.head;
@@ -110,7 +102,7 @@ public class DoublyLinkedList {
 
        if(index > mid){
            int count = this.length - 1;
-           Node current = this.tail;
+           dNode current = this.tail;
            while(count != index){
                 current = current.prev;
                 count--;
@@ -118,11 +110,81 @@ public class DoublyLinkedList {
            return current;
        }else{
            int count = 0;
-           Node current = this.head;
+           dNode current = this.head;
            while(count != index){
                current = current.next;
                count++;
            }
+           return current;
        }
+   }
+   
+   public void set(int index, int value){
+       if(index < 0 || index >= this.length){
+           System.out.println("Set: Out of Bounds");
+       }else{
+           dNode toChange = this.get(index);
+           toChange.value = value;
+       }
+   }
+   
+   public void insert(int index, int value){
+       if(index < 0 || index > this.length){
+           System.out.println("Insert: Out of Bounds");
+       }else if(index == this.length - 1){
+           this.push(value);
+       }else{
+           dNode atIndex = this.get(index);
+           dNode after = this.get(index + 1);
+           dNode toInsert = new dNode(value);
+           
+           atIndex.next = toInsert;
+           toInsert.prev = atIndex;
+           toInsert.next = after;
+           after.prev = toInsert;
+           this.length++;
+       }
+   }
+   
+   public void remove(int index){
+       if(index < 0 || index > this.length){
+           System.out.println("Remove: Out of Bounds");
+       } else if(index == 0){
+           this.shift();
+       }else if(index == this.length - 1){
+           this.pop();
+       }else{
+           dNode beforeRem = this.get(index - 1);
+           dNode afterRem = this.get(index + 1);
+           dNode toRem = this.get(index);
+           
+           toRem.next = null;
+           toRem.prev = null;
+           beforeRem.next = afterRem;
+           afterRem.prev = beforeRem;
+           this.length--;
+       }
+   }
+   
+   @Override
+   public String toString(){
+       String toReturn = "";
+       int count = 0;
+       
+       while(count != this.length){
+           toReturn = toReturn + " " + count + " ";
+           count++;
+       }
+       return toReturn;
+   }
+   
+   public static void main(String [] args){
+       DoublyLinkedList list = new DoublyLinkedList();
+       list.push(1);
+       list.push(2);
+       list.push(3);
+       list.push(4);
+       
+       System.out.println(list);
    }
 }
