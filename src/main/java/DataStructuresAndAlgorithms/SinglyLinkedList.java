@@ -42,6 +42,7 @@ public class SinglyLinkedList {
        Node newTail = null;
        
        if(this.length == 1){
+           this.head = null;
            return this.head;
        }else if(this.length ==0){
            return null;
@@ -75,6 +76,7 @@ public class SinglyLinkedList {
         if(this.head == null){
             this.head = new Node(val);
             this.tail = new Node(val);
+            this.length++;
         }else{
             Node toAdd = new Node(val);
             Node currentHead = this.head;
@@ -168,12 +170,8 @@ public class SinglyLinkedList {
     public static void main(String [] args){
         SinglyLinkedList list = new SinglyLinkedList();
         list.push(2);
-        list.push(3);
-        list.push(8);
-        list.push(7);
-        System.out.println(list);
-        list.reverse();
-        System.out.println(list);
+        list.pop();
+        System.out.println(list.head.value);
         
     }
 }
