@@ -50,8 +50,8 @@ public class DoublyLinkedList {
            return popped;
        }else{
            popped = this.tail;
-           popped.prev = null;
            dNode beforeTail = this.tail.prev;
+           popped.prev = null;
            beforeTail.next = null;
            this.tail = beforeTail;
            this.length--;
@@ -170,9 +170,11 @@ public class DoublyLinkedList {
    public String toString(){
        String toReturn = "";
        int count = 0;
+       dNode current = this.head;
        
        while(count != this.length){
-           toReturn = toReturn + " " + count + " ";
+           toReturn = toReturn + " " + current.value + " ";
+           current = current.next;
            count++;
        }
        return toReturn;
@@ -184,7 +186,12 @@ public class DoublyLinkedList {
        list.push(2);
        list.push(3);
        list.push(4);
-       
        System.out.println(list);
+       list.pop();
+       list.insert(2,9);
+       System.out.println(list);
+       list.remove(1);
+       System.out.println(list);
+       
    }
 }
