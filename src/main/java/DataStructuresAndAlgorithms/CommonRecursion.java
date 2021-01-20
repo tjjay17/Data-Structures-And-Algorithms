@@ -10,6 +10,9 @@ package DataStructuresAndAlgorithms;
  * @author Tj
  */
 public class CommonRecursion {
+    //reverse a string isn't often done the same in java as other langs
+    //its more commone to have....
+    //return reverseString(s.substring(1)) + s.charAt(0)
     public String reverseString(String s){
         if(s.length() == 1){
             return  String.valueOf(s.charAt(0));
