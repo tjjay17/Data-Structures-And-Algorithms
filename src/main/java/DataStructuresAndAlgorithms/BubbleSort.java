@@ -10,6 +10,9 @@ import java.util.Arrays;
  *
  * @author Tj
  */
+
+//Generally speaking, bubble sort sucks. Best case O(n) if already sorted
+//if not, then it's O(n^2)
 public class BubbleSort {
     private int [] bruteForce(int [] array){
         int temp = 0;
