@@ -14,22 +14,21 @@ public class SelectionSort {
         super();
     }
     private int [] sort(int [] arr){
-        int len = arr.length;
-        int temp = 0;
-        int min = 0;
-        
-        for(int i = 0; i<len - 1; i++){
-            min = i;
-            for(int j = i + 1; j< len; j++){
-                if(arr[min] > arr[j]){
-                    min = j;
-                }
-            }
-            temp = arr[min];
-            arr[min] = arr[i];
-            arr[i] = temp;
-        }
-     return arr; 
+       int minIndex = 0;
+       int temp = 0;
+       
+       for(int i = 0; i<arr.length;i++){
+           minIndex = i;
+           for(int j = i+1; j<arr.length;j++){
+               if(arr[j] < arr[minIndex]){
+                   minIndex = j;
+               }
+           }
+           temp = arr[minIndex];
+           arr[minIndex] = arr[i];
+           arr[i] = temp;
+       }
+       return arr;
     }
     
     public static void main(String [] args){
