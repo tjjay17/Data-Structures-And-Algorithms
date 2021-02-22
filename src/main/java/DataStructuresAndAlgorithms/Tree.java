@@ -83,9 +83,20 @@ public class Tree {
         if(node.right != null){
             postOrderDFS(node.right);
         }
-        
         postOrderStored.add(node.value);
         return postOrderStored;
+    }
+    
+    ArrayList <Integer> inOrderStored = new ArrayList<Integer>();
+    public ArrayList <Integer> inOrderDFS(tNode node){
+        if(node.left != null){
+            inOrderDFS(node.left);
+        }
+        inOrderStored.add(node.value);
+        if(node.right != null){
+            inOrderDFS(node.right);
+        }
+        return inOrderStored;
     }
         
     public static void main(String [] args){
@@ -106,5 +117,6 @@ public class Tree {
         System.out.println(tree.BFS());
         System.out.println(tree2.preorderDFS(root2));
         System.out.println(tree2.postOrderDFS(root2));
+        System.out.println(tree2.inOrderDFS(root2));
     }
 }
